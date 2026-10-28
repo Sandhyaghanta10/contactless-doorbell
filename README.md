@@ -3,10 +3,7 @@
 A doorbell that watches a camera, recognizes registered visitors, and emails the homeowner,
 with a benchmark that measures how recognition **accuracy, latency and lighting** trade off.
 
-> **Recreation note:** I originally built a Raspberry Pi contactless doorbell as a college project
-> (Siva Subramaniya Nadar College of Engineering, 2018-22). That code is no longer available, so this is a **fresh 2026
-> recreation** (Python + OpenCV, Pi-friendly). The git history dates are real. I did not have the
-> Pi hardware while recreating it, so all measurements below come from the machine named in the results file.
+> Recreated in 2026. Originally built 2018–22.
 
 ## Pipeline
 ```
@@ -58,6 +55,8 @@ python -m doorbell run --gallery faces/                   # sends email
 `faces/` has one sub-folder of photos per registered visitor.
 
 ## Limitations (honest list)
+- This recreation was developed without Raspberry Pi hardware or a live camera; the camera loop is untested
+  and benchmark numbers come from the machine named in `results/results.md`.
 - LBPH + Haar are 2000s-era methods: weak on pose, occlusion and large lighting changes; no liveness check
   (a photo held up to the camera would fool it). Modern deep models (e.g. OpenCV's YuNet + SFace) would do better.
 - Gamma is a crude proxy for real lighting changes (no directional shadows or color casts).
