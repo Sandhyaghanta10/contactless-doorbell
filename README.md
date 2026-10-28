@@ -5,6 +5,28 @@ with a benchmark that measures how recognition **accuracy, latency and lighting*
 
 > Recreated in 2026. Originally built 2018–22.
 
+## The original project
+The original was a two-person B.Tech project report at SSN College of Engineering, built with **Boyapati Yagnavi Chowdari**.
+It was a Raspberry Pi 3B+ doorbell with a webcam, a buzzer and a 16x2 I2C LCD:
+- A registered visitor is greeted on the LCD and the owner gets an email with the visitor's name and photo.
+- An unknown visitor sounds the buzzer and the owner gets an email with their photo.
+- Faces were matched with the `face_recognition` library (dlib 128-d embeddings) over an OpenCV Haar-cascade detector; email went out via Mailgun.
+- **Result reported:** 91.4% accuracy on a known-vs-unknown test (confusion matrix: 58 unknown correct, 10 unknown wrongly accepted,
+  4 known wrongly rejected, 92 known correct = 150 / 164). The report does not describe the test set beyond this matrix.
+
+## How this recreation differs
+This repository is a fresh software-only rewrite, not the original code. It is **not** a reproduction of the original's results.
+
+| | Original (2022 report) | This recreation (2026) |
+|---|---|---|
+| Hardware | Raspberry Pi 3B+, webcam, buzzer, LCD | None; software only, not tested on a Pi |
+| Detection | OpenCV Haar cascade | OpenCV Haar cascade |
+| Recognition | `face_recognition` (dlib embeddings) | OpenCV LBPH with a distance threshold |
+| Notification | Mailgun email with photo | SMTP email (credentials from environment variables), plus a cooldown per visitor |
+| Evaluation | One known/unknown accuracy test (91.4%) | A benchmark harness: face size, histogram equalization, simulated lighting, unknown-visitor threshold |
+
+The lighting and latency experiments below are **new work in this recreation**; the original report did not include them.
+
 ## Pipeline
 ```
 camera frame -> Haar face detector -> normalize (resize [+ histogram equalization])
