@@ -6,7 +6,7 @@ with a benchmark that measures how recognition **accuracy, latency and lighting*
 > Recreated in 2026. Originally built 2018–22.
 
 ## The original project
-The original was a two-person B.Tech project report at SSN College of Engineering, built with **Boyapati Yagnavi Chowdari**.
+The original was a two-person B.Tech final-year project, built together with a teammate.
 It was a Raspberry Pi 3B+ doorbell with a webcam, a buzzer and a 16x2 I2C LCD:
 - A registered visitor is greeted on the LCD and the owner gets an email with the visitor's name and photo.
 - An unknown visitor sounds the buzzer and the owner gets an email with their photo.
